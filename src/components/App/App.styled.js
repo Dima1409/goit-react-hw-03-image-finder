@@ -6,5 +6,8 @@ const App = styled.div`
     grid-gap: 16px;
     padding-bottom: 24px;
 `
+const TitleInfo = styled.h2`
+   text-align: center;
+`
 
-export {App};
+export {App, TitleInfo};

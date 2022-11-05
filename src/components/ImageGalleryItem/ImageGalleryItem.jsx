@@ -1,14 +1,22 @@
 import React from 'react';
-import { ImageGalleryItem, ImageGalleryItemImage } from './ImageGalleryItem.styled';
+import { Item, ItemImage } from './ImageGalleryItem.styled';
+import PropTypes from 'prop-types';
 
-const GalleryItem = () => {
+const ImageGalleryItem = ({preview, originalSize, desc, id, openModal}) => {
     return (
         <>
-        <ImageGalleryItem>
-            <ImageGalleryItemImage/>
-        </ImageGalleryItem>
+        <Item key={id}>
+            <ItemImage src={preview} data-source={originalSize} alt={desc} onClick={openModal} loading='lazy'/>
+        </Item>
         </>
         
     )
 }
-export default GalleryItem;
+ImageGalleryItem.propTypes = {
+    preview: PropTypes.string,
+    originalSize: PropTypes.string,
+    desc: PropTypes.string,
+    id: PropTypes.number,
+    openModal: PropTypes.func
+}
+export default ImageGalleryItem;

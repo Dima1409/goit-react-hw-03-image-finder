@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { SearchBar, SearchForm, SearchFormButton, SearchFormInput, SearchFormButtonLabel} from './Searchbar.styled';
 
 class Search extends Component {
@@ -16,19 +17,18 @@ class Search extends Component {
         event.preventDefault();
         const {searchValue} = this.state;
         if(searchValue.trim() === '') {
-            toast.warn('Please enter value', {
-            position: "top-right",
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            autoClose: 3000,
-            })
-            return;
+                toast.warn('Please enter value', {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+                })
+                return;
     }
-        this.props.onSubmit(this.state.searchValue);
+        this.props.onSubmitForm(this.state.searchValue);
         this.setState({searchValue: ''});
     }
     render() {

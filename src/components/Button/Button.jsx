@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "./Button.styled";
 
-const BtnMore = () => {
-    return <Button>Load more</Button>
+const BtnMore = ({text, type, onClickBtn}) => {
+    return <Button type={type} onClick={onClickBtn}>{text}</Button>
 }
 
 export default BtnMore;
