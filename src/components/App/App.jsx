@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { App, TitleInfo } from "./App.styled";
+import { App, TitleInfo, Spinner} from "./App.styled";
 import Api from "components/api/api-image";
 import Search from "components/SearchBar";
 import Gallery from "components/ImageGallery";
 import GalleryItem from "components/ImageGalleryItem";
 import BtnMore from "components/Button";
+import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
-//import ModalC from "components/Modal";
+import { ThreeDots } from  'react-loader-spinner'
+
+
 const Status = {
   IDLE: 'idle',
   PENDING: 'pending',
@@ -15,10 +18,11 @@ const Status = {
 };
 const INITIAL_STATE = {
   results: [],
+  totalHits: 0,
   searchValue: '',
   page: 1,
   per_page: 12,
-  status: Status.IDLE
+  status: Status.IDLE,
 }
 
 
@@ -51,7 +55,8 @@ class AppC extends Component {
     try {
       const {data} = await Api(params);
       this.setState(prevState=>({
-        results: [...data.hits],
+        results: [...prevState.results, ...data.hits],
+        totalHits: data.totalHits,
         page: prevState.page+1,
         status: Status.RESOLVED 
       }))
@@ -70,9 +75,11 @@ class AppC extends Component {
   };
 
   handleBtnMore = () => {
+    this.setState({
+      status: Status.PENDING
+    })
     this.getPhotos();
   }
-
 
   render() {
     const {results, status} = this.state;
@@ -84,6 +91,18 @@ class AppC extends Component {
       </App>
       )
     }
+    if(status === 'pending') {
+ return <Spinner>
+  <ThreeDots
+     height="200" 
+     width="200"
+     radius="9"
+     color="#3f51b5" 
+     ariaLabel="three-dots-loading"
+     visible={true}
+      />
+  </Spinner>
+    }
     if(status === 'resolved') {
       return (
       <App>
@@ -93,7 +112,6 @@ class AppC extends Component {
       </Gallery>
       <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>
       <ToastContainer/>
-      {/* <ModalC></ModalC> */}
       </App>
     )}
   }

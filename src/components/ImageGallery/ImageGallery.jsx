@@ -2,11 +2,15 @@ import React from "react";
 import ImageGalleryItem from "components/ImageGalleryItem";
 import {ImageGallery} from "./ImageGallery.styled";
 
-const Gallery = ({results, onImageClick}) => {
+const Gallery = ({results}) => {
     return (
        <ImageGallery>
-        {results.map(({webformatURL, largeImageURL, tags, id})=>(
-            <ImageGalleryItem preview={webformatURL} originalSize={largeImageURL} desk={tags} key={id} onClick={()=>onImageClick()}></ImageGalleryItem>
+        {results.map(({webformatURL, tags, largeImageURL, id})=>(
+            <ImageGalleryItem 
+            src={webformatURL} 
+            alt={tags} 
+            largeSrc={largeImageURL} 
+            key={id} />
         ))}
     </ImageGallery> 
     )

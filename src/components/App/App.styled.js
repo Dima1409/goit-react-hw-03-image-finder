@@ -9,5 +9,13 @@ const App = styled.div`
 const TitleInfo = styled.h2`
    text-align: center;
 `
-
-export {App, TitleInfo};
+const Spinner = styled.div`
+   color: red;
+   height: 100vh;
+   width: 100vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0 auto;
+`
+export {App, TitleInfo, Spinner};

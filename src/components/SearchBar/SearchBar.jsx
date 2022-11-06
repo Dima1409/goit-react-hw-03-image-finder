@@ -29,7 +29,7 @@ class Search extends Component {
                 return;
     }
         this.props.onSubmitForm(this.state.searchValue);
-        this.setState({searchValue: ''});
+        this.setState({searchValue});
     }
     render() {
         const {searchValue} = this.state;
