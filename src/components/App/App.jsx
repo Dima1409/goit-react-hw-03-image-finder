@@ -60,7 +60,9 @@ class AppC extends Component {
         page: prevState.page+1,
         status: Status.RESOLVED 
       }))
+      this.totalResults(data)
     }
+    
     catch(error) {
         this.setState({error})
         this.setState(({
@@ -68,6 +70,15 @@ class AppC extends Component {
         }))
     }
   }
+
+  totalResults=(value) => {
+      if(value.totalHits!==0 && this.state.page===1) {
+      toast.success(`We found ${value.totalHits} images for your request`)
+      }
+      if(value.totalHits===0) {
+      toast.info(`No results for your search '${this.state.searchValue}', please try again`)
+      }
+}
 
   handleFormSubmit = searchValue => {
     this.setState({...INITIAL_STATE})
@@ -82,7 +93,7 @@ class AppC extends Component {
   }
 
   render() {
-    const {results, status} = this.state;
+    const {results, status, totalHits, per_page, page} = this.state;
     if(status === 'idle') {
       return (
         <App>
@@ -110,7 +121,7 @@ class AppC extends Component {
       <Gallery results={results}>
        <GalleryItem/>
       </Gallery>
-      <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>
+      {totalHits!==0 && totalHits / per_page > page-1 && <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>}
       <ToastContainer/>
       </App>
     )}
