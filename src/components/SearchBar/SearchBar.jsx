@@ -17,7 +17,7 @@ class Search extends Component {
         event.preventDefault();
         const {searchValue} = this.state;
         if(searchValue.trim() === '') {
-                toast.warn('Please enter value', {
+                toast.warn('Please enter a value', {
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: false,

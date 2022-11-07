@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { App, TitleInfo, Spinner} from "./App.styled";
 import Api from "components/api/api-image";
 import Search from "components/SearchBar";
@@ -54,6 +54,9 @@ class AppC extends Component {
     const params = {searchValue, page, per_page};
     try {
       const {data} = await Api(params);
+      if(searchValue.trim()==='') {
+        return;
+      }
       this.setState(prevState=>({
         results: [...prevState.results, ...data.hits],
         totalHits: data.totalHits,
@@ -90,6 +93,7 @@ class AppC extends Component {
       status: Status.PENDING
     })
     this.getPhotos();
+    
   }
 
   render() {
