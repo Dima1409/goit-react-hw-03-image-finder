@@ -1,13 +1,14 @@
 import React, { Component} from "react";
-import { App, TitleInfo, Spinner} from "./App.styled";
+import { App, TitleInfo} from "./App.styled";
 import Api from "components/api/api-image";
 import Search from "components/SearchBar";
 import Gallery from "components/ImageGallery";
 import GalleryItem from "components/ImageGalleryItem";
+import Loader from "components/Loader";
 import BtnMore from "components/Button";
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
-import { ThreeDots } from  'react-loader-spinner'
 
 
 const Status = {
@@ -106,42 +107,19 @@ class AppC extends Component {
       <Gallery results={results}>
        {status==='resolved' && <GalleryItem/>}
       </Gallery>
-      {status==='pending' && <Spinner>
-  <ThreeDots
-     height="200" 
-     width="200"
-     radius="9"
-     color="#3f51b5" 
-     ariaLabel="three-dots-loading"
-     visible={true} 
-      />
-  </Spinner>}
+      {status==='pending' && <Loader/>}
       {totalHits!==0 && totalHits / per_page > page-1 && <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>}
       <ToastContainer/>
       </App>
       )
-//     if(status === 'pending') {
-//  return <Spinner>
-//   <ThreeDots
-//      height="200" 
-//      width="200"
-//      radius="9"
-//      color="#3f51b5" 
-//      ariaLabel="three-dots-loading"
-//      visible={true} 
-//       />
-//   </Spinner>
-//     }
-    //   return (
-    //   <App>
-    //   <Search onSubmitForm={this.handleFormSubmit}/>
-    //   <Gallery results={results}>
-    //    <GalleryItem/>
-    //   </Gallery>
-    //   {totalHits!==0 && totalHits / per_page > page-1 && <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>}
-    //   <ToastContainer/>
-    //   </App>
-    // )
   }
+}
+
+AppC.propTypes = {
+  results: PropTypes.array,
+  status: PropTypes.string,
+  totalHits: PropTypes.number,
+  per_page: PropTypes.number,
+  page: PropTypes.number
 }
 export default AppC;

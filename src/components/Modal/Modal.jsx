@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Overlay, Modal } from './Modal.styled';
 import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -35,6 +36,10 @@ class ModalC extends Component {
     modalRoot
         )
     }
+}
+ModalC.propTypes = {
+    original: PropTypes.string,
+    desc: PropTypes.string
 }
 
 export default ModalC;

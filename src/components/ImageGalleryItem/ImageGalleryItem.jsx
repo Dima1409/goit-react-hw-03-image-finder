@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Item, ItemImage } from './ImageGalleryItem.styled';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ModalC from 'components/Modal';
 
 class ImageGalleryItem extends Component {
@@ -28,11 +28,10 @@ class ImageGalleryItem extends Component {
     )
     }
 }
-// ImageGalleryItem.propTypes = {
-//     preview: PropTypes.string,
-//     originalSize: PropTypes.string,
-//     desc: PropTypes.string,
-//     id: PropTypes.number,
-//     openModal: PropTypes.func
-// }
+ImageGalleryItem.propTypes = {
+    src: PropTypes.string,
+    largeSrc: PropTypes.string,
+    alt: PropTypes.string,
+    toggleModal: PropTypes.func
+}
 export default ImageGalleryItem;

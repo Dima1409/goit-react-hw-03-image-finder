@@ -8,11 +8,8 @@ const App = styled.div`
 `
 const TitleInfo = styled.h2`
    text-align: center;
+   color: grey;
+   font-size: 26px;
+   font-weight: 400;
 `
-const Spinner = styled.div`
-   position: fixed;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-`
-export {App, TitleInfo, Spinner};
+export {App, TitleInfo};

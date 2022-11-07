@@ -1,6 +1,7 @@
 import React from "react";
 import ImageGalleryItem from "components/ImageGalleryItem";
 import {ImageGallery} from "./ImageGallery.styled";
+import PropTypes from 'prop-types';
 
 const Gallery = ({results}) => {
     return (
@@ -15,6 +16,11 @@ const Gallery = ({results}) => {
     </ImageGallery> 
     )
 }
-
+Gallery.propTypes = {
+    results: PropTypes.array,
+    webformatURL: PropTypes.string,
+    tags: PropTypes.array,
+    id: PropTypes.number
+}
 export default Gallery;
 
