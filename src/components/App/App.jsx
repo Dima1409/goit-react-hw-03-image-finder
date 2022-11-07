@@ -31,7 +31,7 @@ class AppC extends Component {
   state={...INITIAL_STATE}
   async componentDidMount() {
     try {
-      if(this.setState.searchValue==='') {
+      if(this.state.searchValue==='') {
         return;
       }
       const {data} = await Api();
@@ -52,6 +52,7 @@ class AppC extends Component {
   async getPhotos() {
     const {searchValue, page, per_page} = this.state;
     const params = {searchValue, page, per_page};
+    this.setState({ status: Status.PENDING })
     try {
       const {data} = await Api(params);
       if(searchValue.trim()==='') {
@@ -118,7 +119,6 @@ class AppC extends Component {
       />
   </Spinner>
     }
-    if(status === 'resolved') {
       return (
       <App>
       <Search onSubmitForm={this.handleFormSubmit}/>
@@ -128,7 +128,7 @@ class AppC extends Component {
       {totalHits!==0 && totalHits / per_page > page-1 && <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>}
       <ToastContainer/>
       </App>
-    )}
+    )
   }
 }
 export default AppC;
