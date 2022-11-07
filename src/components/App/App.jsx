@@ -99,36 +99,49 @@ class AppC extends Component {
 
   render() {
     const {results, status, totalHits, per_page, page} = this.state;
-    if(status === 'idle') {
       return (
         <App>
       <Search onSubmitForm={this.handleFormSubmit}/>
-      <TitleInfo>Try to enter a value...</TitleInfo>
-      </App>
-      )
-    }
-    if(status === 'pending') {
- return <Spinner>
+      {status==='idle' && <TitleInfo>Try to enter a value...</TitleInfo>}
+      <Gallery results={results}>
+       {status==='resolved' && <GalleryItem/>}
+      </Gallery>
+      {status==='pending' && <Spinner>
   <ThreeDots
      height="200" 
      width="200"
      radius="9"
      color="#3f51b5" 
      ariaLabel="three-dots-loading"
-     visible={true}
+     visible={true} 
       />
-  </Spinner>
-    }
-      return (
-      <App>
-      <Search onSubmitForm={this.handleFormSubmit}/>
-      <Gallery results={results}>
-       <GalleryItem/>
-      </Gallery>
+  </Spinner>}
       {totalHits!==0 && totalHits / per_page > page-1 && <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>}
       <ToastContainer/>
       </App>
-    )
+      )
+//     if(status === 'pending') {
+//  return <Spinner>
+//   <ThreeDots
+//      height="200" 
+//      width="200"
+//      radius="9"
+//      color="#3f51b5" 
+//      ariaLabel="three-dots-loading"
+//      visible={true} 
+//       />
+//   </Spinner>
+//     }
+    //   return (
+    //   <App>
+    //   <Search onSubmitForm={this.handleFormSubmit}/>
+    //   <Gallery results={results}>
+    //    <GalleryItem/>
+    //   </Gallery>
+    //   {totalHits!==0 && totalHits / per_page > page-1 && <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>}
+    //   <ToastContainer/>
+    //   </App>
+    // )
   }
 }
 export default AppC;

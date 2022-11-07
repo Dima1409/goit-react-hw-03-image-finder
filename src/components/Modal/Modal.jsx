@@ -29,7 +29,7 @@ class ModalC extends Component {
             <img 
             src={original} 
             alt={desc}
-            width='900'/>
+            width='1000'/>
         </Modal>
     </Overlay>, 
     modalRoot

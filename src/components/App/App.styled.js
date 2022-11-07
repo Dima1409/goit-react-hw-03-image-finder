@@ -10,12 +10,9 @@ const TitleInfo = styled.h2`
    text-align: center;
 `
 const Spinner = styled.div`
-   color: red;
-   height: 100vh;
-   width: 100vw;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   margin: 0 auto;
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
 `
 export {App, TitleInfo, Spinner};
