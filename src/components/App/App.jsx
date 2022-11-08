@@ -30,21 +30,9 @@ const INITIAL_STATE = {
 
 class AppC extends Component {
   state={...INITIAL_STATE}
-  async componentDidMount() {
-    try {
-      if(this.state.searchValue==='') {
-        return;
-      }
-      const {data} = await Api();
-      this.setState({data})
-    }
-    catch(error) {
-      this.setState({error});
-    }
-  }
   
   componentDidUpdate(_, prevState) {
-    if(prevState.searchValue !== this.state.searchValue) {
+    if(prevState.searchValue !== this.state.searchValue || prevState.page !== this.state.page) {
       this.setState({ status: Status.PENDING });
       this.getPhotos();
     }
@@ -62,7 +50,6 @@ class AppC extends Component {
       this.setState(prevState=>({
         results: [...prevState.results, ...data.hits],
         totalHits: data.totalHits,
-        page: prevState.page+1,
         status: Status.RESOLVED 
       }))
       this.totalResults(data)
@@ -91,11 +78,9 @@ class AppC extends Component {
   };
 
   handleBtnMore = () => {
-    this.setState({
-      status: Status.PENDING
-    })
-    this.getPhotos();
-    
+    this.setState(prevState=>({
+      page: prevState.page+1
+    }))
   }
 
   render() {
@@ -108,7 +93,7 @@ class AppC extends Component {
        {status==='resolved' && <GalleryItem/>}
       </Gallery>
       {status==='pending' && <Loader/>}
-      {totalHits!==0 && totalHits / per_page > page-1 && <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>}
+      {totalHits!==0 && totalHits / per_page > page && <BtnMore text='Load more' type='button' onClickBtn={this.handleBtnMore}></BtnMore>}
       <ToastContainer/>
       </App>
       )
